@@ -1,0 +1,123 @@
+.top_navbar {
+  width: 100%;
+  height: 4rem;
+  background: $app-theme;
+  padding: 0 2rem;
+  box-shadow: $box-shadow;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+
+  &_icon {
+    width: 4rem;
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &_wrapper {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+
+      &_img {
+        width: 1.6rem;
+        height: 1.6rem;
+        overflow: hidden;
+        cursor: pointer;
+      }
+    }
+
+    &_supporter {
+      position: absolute;
+      top: 4.5rem;
+      background: $green;
+      z-index: 1000;
+      border-radius: 2px;
+      overflow: hidden;
+      right: 0.5rem;
+      padding: 1rem;
+      width: 20rem;
+      box-shadow: $box-shadow;
+      display: none;
+
+      &_pro {
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+        padding: 1rem 1rem 0rem 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        &_icon {
+          width: 5rem;
+          height: 5rem;
+          background: $silver;
+          border-radius: 50%;
+          overflow: hidden;
+          padding: 0.8rem;
+          margin-bottom: 1rem;
+
+          &_img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+
+        &_name {
+          font-size: 1.4rem;
+          color: $white;
+          line-height: 1.4rem;
+          margin-bottom: 1rem;
+          font-weight: 400;
+        }
+
+        &_email {
+          font-size: 1.4rem;
+          line-height: 1.8rem;
+          width: 100%;
+          word-wrap: break-word;
+          color: $white;
+          margin-bottom: 1rem;
+          text-align: center;
+          font-weight: 400;
+        }
+      }
+
+      &_links {
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+
+        &_area {
+          width: 100%;
+          height: 3rem;
+          padding: 0 1rem;
+          display: inline-block;
+          display: flex;
+          align-items: center;
+
+          & i {
+            margin-right: 1rem;
+            font-size: 1.3rem;
+          }
+        }
+      }
+    }
+  }
+
+  &_menu {
+    width: auto;
+    height: 100%;
+    display: flex;
+  }
+}

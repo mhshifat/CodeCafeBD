@@ -1,0 +1,41 @@
+// Import Fonts
+@import url("https://fonts.googleapis.com/css?family=Kurale|Lato:300,400,700|Open+Sans:300,400,600,700,800|Raleway:300,400,500,600,700,800|Roboto:300,400,500,700,900");
+
+// SCSS Variables
+
+// Font Family
+$roboto: "Roboto", sans-serif;
+$lato: "Lato", sans-serif;
+$raleway: "Raleway", sans-serif;
+$open-sans: "Open Sans", sans-serif;
+$kurale: "Kurale", serif;
+
+// Color
+$green: #55c57a;
+$green-light: #7ed56f;
+$green-dark: #28b485;
+$silver: #e4e7ea;
+$bg-app: #eeeeee;
+$white: #ffffff;
+$text-color: rgb(116, 115, 115);
+$hr: rgba(228, 231, 234, 0.3);
+$overlay: linear-gradient(
+  to right bottom,
+  rgba(85, 197, 122, 0.3),
+  rgba(40, 180, 133, 0.3)
+);
+$bg-overlay: linear-gradient(
+  90deg,
+  rgba(40, 180, 133, 0.1),
+  rgba(85, 197, 122, 0.1),
+  rgba(40, 180, 133, 0.1)
+);
+$input-back: #eeeeee;
+$modal-back: rgba(0, 0, 0, 0.5);
+
+// Gradient
+$app-theme: linear-gradient(to right, $green, $green-light, $green);
+
+// Box Shadows
+$box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+$box-shadow-2: 0 0 30px rgba(0, 0, 0, 0.07);
