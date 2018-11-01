@@ -72,6 +72,16 @@ a {
   padding-bottom: 0rem;
 }
 
+input,
+input:focus {
+  border: none;
+  outline: none;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
 // Media Queries
 @media only screen and (max-width: 786px) {
   .app_root {

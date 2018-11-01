@@ -1,4 +1,5 @@
 // Import Dependencies
+import path from "path";
 import express from "express";
 import color from "colors";
 import morgan from "morgan";
@@ -28,6 +29,14 @@ app.get("/api", (req, res) => {
     description
   });
 });
+
+// For Production
+if (process.env.NODE_ENV === "production") {
+  app.use(path.join(__dirname, "client", "build"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 
 // Listening For Port
 app.listen(port, () => {

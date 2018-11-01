@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
+import { changeSidebarState } from "../../Store/Actions/systemActions";
 
 // Components
 import TopNavbarIcon from "./TopNavbarIcon";
@@ -26,10 +29,17 @@ class TopNavbar extends Component {
     }
   };
 
+  onHamburgerMenuClickHandler = () => {
+    this.props.changeSidebarState();
+  };
+
   render() {
     return (
       <nav className="top_navbar">
-        <TopNavbarIcon icon="hamburger.svg" />
+        <TopNavbarIcon
+          click={this.onHamburgerMenuClickHandler}
+          icon="hamburger.svg"
+        />
         <div className="top_navbar_menu">
           <TopNavbarIcon icon="envelop.svg" width="1.8rem" height="1.8rem" />
           <TopNavbarIcon
@@ -57,4 +67,7 @@ class TopNavbar extends Component {
   }
 }
 
-export default TopNavbar;
+export default connect(
+  null,
+  { changeSidebarState }
+)(TopNavbar);

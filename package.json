@@ -15,7 +15,8 @@
     "dev-server": "npm-run-all -p dev back-server",
     "install-all": "npm install && npm install --prefix=client",
     "client-server": "npm start --prefix=client",
-    "server": "npm-run-all -p dev-server client-server"
+    "server": "npm-run-all -p dev-server client-server",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
   "author": "Mehedi Hassan Shifat",
   "license": "ISC",
