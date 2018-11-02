@@ -7,6 +7,7 @@ import * as serviceWorker from "./serviceWorker";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./assets/css/main.css";
+import "animate.css/animate.min.css";
 
 // Import Store
 import store from "./Store/store";

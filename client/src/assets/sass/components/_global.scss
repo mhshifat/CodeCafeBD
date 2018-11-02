@@ -63,13 +63,12 @@ a {
 
 .app_root {
   width: calc(100% - 24rem);
-  min-height: calc(100vh - 4rem);
+  min-height: calc(100vh - 20rem);
   background: transparent;
   margin-left: 24rem;
   border-radius: 2px;
   overflow: hidden;
   padding: 2rem;
-  padding-bottom: 0rem;
 }
 
 input,
@@ -80,6 +79,15 @@ input:focus {
 
 ::-webkit-scrollbar {
   width: 0;
+}
+
+.inner_root {
+  width: 100%;
+  min-height: inherit;
+  overflow: hidden;
+  background: $white;
+  border-radius: 2px;
+  box-shadow: $box-shadow;
 }
 
 // Media Queries
