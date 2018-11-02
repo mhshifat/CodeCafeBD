@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { changeSidebarState } from "../../Store/Actions/systemActions";
+import { changeSidebarStateToClose } from "../../Store/Actions/systemActions";
 
 // Components
 import SideNavbarHeader from "./SideNavbarHeader";
@@ -13,7 +13,7 @@ class SideNavbar extends Component {
   componentDidMount = () => {
     const getRootEl = document.querySelector(".app_root");
     getRootEl.addEventListener("click", () => {
-      this.props.changeSidebarState();
+      this.props.changeSidebarStateToClose();
       const getAllActiveDropDown = document.querySelectorAll(
         ".rotateDropDownIcon"
       );
@@ -49,5 +49,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { changeSidebarState }
+  { changeSidebarStateToClose }
 )(SideNavbar);

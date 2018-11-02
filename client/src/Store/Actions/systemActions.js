@@ -1,7 +1,13 @@
-import { SIDEBAR_STATE } from "./types";
+import { SIDEBAR_STATE_OPEN, SIDEBAR_STATE_CLOSE } from "./types";
 
-export const changeSidebarState = () => dispatch => {
+export const changeSidebarStateToOpen = () => dispatch => {
   dispatch({
-    type: SIDEBAR_STATE
+    type: SIDEBAR_STATE_OPEN
+  });
+};
+
+export const changeSidebarStateToClose = () => dispatch => {
+  dispatch({
+    type: SIDEBAR_STATE_CLOSE
   });
 };

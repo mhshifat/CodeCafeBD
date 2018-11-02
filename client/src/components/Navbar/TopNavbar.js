@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { changeSidebarState } from "../../Store/Actions/systemActions";
+import { changeSidebarStateToOpen } from "../../Store/Actions/systemActions";
 
 // Components
 import TopNavbarIcon from "./TopNavbarIcon";
@@ -30,7 +30,7 @@ class TopNavbar extends Component {
   };
 
   onHamburgerMenuClickHandler = () => {
-    this.props.changeSidebarState();
+    this.props.changeSidebarStateToOpen();
   };
 
   render() {
@@ -69,5 +69,5 @@ class TopNavbar extends Component {
 
 export default connect(
   null,
-  { changeSidebarState }
+  { changeSidebarStateToOpen }
 )(TopNavbar);
