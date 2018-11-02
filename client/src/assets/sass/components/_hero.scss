@@ -1,0 +1,93 @@
+.hero {
+  width: 100%;
+  min-height: calc(100vh - 8rem);
+  background: url("/images/website/hero.jpg") no-repeat;
+  background-position: top right;
+  background-attachment: fixed;
+  background-size: cover;
+  overflow: hidden;
+
+  &_overlay {
+    width: 100%;
+    min-height: inherit;
+    background: $bg-overlay;
+    overflow: hidden;
+
+    &_info {
+      width: 60rem;
+      min-height: calc(100vh - 8rem);
+      overflow: hidden;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 20rem;
+      position: relative;
+
+      &_title {
+        font-size: 4rem;
+        line-height: 5rem;
+        margin-bottom: 1rem;
+        font-weight: 700;
+        text-align: center;
+        color: $white;
+        text-shadow: $box-shadow-green;
+      }
+
+      &_subtitle {
+        font-size: 2rem;
+        line-height: 3rem;
+        margin-bottom: 5rem;
+        font-weight: 700;
+        text-align: center;
+        color: $white;
+        text-shadow: $box-shadow-green;
+      }
+
+      &_link {
+        display: inline-block;
+        margin: 0 auto;
+        width: auto;
+        height: auto;
+        font-size: 1.6rem;
+        background: $white;
+        color: $green-dark;
+        padding: 0.8rem 2rem;
+        border-radius: 2px;
+        box-shadow: $box-shadow-green;
+        border: 2px solid transparent;
+
+        &:hover {
+          background: $hero-link-hover;
+          color: $white;
+          border: 2px solid $white;
+        }
+      }
+    }
+  }
+}
+
+// Media Queries
+@media only screen and (max-width: 880px) {
+  .hero_overlay_info {
+    width: 100%;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  .hero_overlay_info_title {
+    font-size: 3rem;
+  }
+  .hero_overlay_info_subtitle {
+    font-size: 2rem;
+  }
+  .hero_overlay_info_link {
+    padding: 0.5rem 1rem;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .hero_overlay_info {
+    width: 100%;
+    padding: 5rem 2rem 0 2rem;
+  }
+}

@@ -90,6 +90,13 @@ input:focus {
   box-shadow: $box-shadow;
 }
 
+.container {
+  max-width: 114rem;
+  height: auto;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
 // Media Queries
 @media only screen and (max-width: 786px) {
   .app_root {

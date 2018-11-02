@@ -25,3 +25,43 @@
   opacity: 1 !important;
   transform: translateX(0) !important;
 }
+
+.scroll_down {
+  position: absolute;
+  top: 92%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: auto;
+  height: auto;
+  overflow: hidden;
+  color: $white;
+
+  &_inner {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    font-style: italic;
+    line-height: 1rem;
+    animation: scroll 2s ease-in-out infinite;
+
+    &_title {
+      margin-bottom: 0.5rem;
+    }
+  }
+}
+
+@keyframes scroll {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
