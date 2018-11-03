@@ -77,6 +77,12 @@ input:focus {
   outline: none;
 }
 
+button,
+button:active {
+  outline: none;
+  border: none;
+}
+
 ::-webkit-scrollbar {
   width: 0;
 }
@@ -97,10 +103,54 @@ input:focus {
   margin: 0 auto;
 }
 
+.section_title {
+  font-size: 2.5rem;
+  line-height: 3.5rem;
+  color: $green-dark;
+  font-weight: 700;
+  text-shadow: $box-shadow-section-title;
+  margin-bottom: 1rem;
+}
+
+.section_underline {
+  display: block;
+  width: 6rem;
+  height: 2px;
+  background: $app-theme;
+  margin: 0 auto;
+  border-radius: 10rem;
+  margin-bottom: 5rem;
+}
+
+.row {
+  overflow: hidden;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.card {
+  width: 35rem;
+  height: auto;
+  overflow: hidden;
+  box-shadow: $box-shadow;
+  margin: 1rem;
+  border-radius: 2px;
+}
+
 // Media Queries
 @media only screen and (max-width: 786px) {
   .app_root {
     margin-left: 0;
     width: 100%;
+  }
+}
+
+@media only screen and (max-width: 1445px) {
+  .row {
+    padding: 0 2rem;
+    justify-content: space-evenly;
   }
 }
