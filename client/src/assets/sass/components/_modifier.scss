@@ -250,3 +250,120 @@
   box-shadow: $box-shadow;
   margin-bottom: 0.5rem;
 }
+
+.modal_btn {
+  width: 5rem;
+  height: 5rem;
+  position: fixed;
+  right: 5rem;
+  bottom: 5rem;
+  border-radius: 50%;
+  background: $green-dark;
+  box-shadow: $box-shadow;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $white;
+  cursor: pointer;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1100;
+  width: 100%;
+  min-height: 100vh;
+  background: rgba(16, 16, 16, 0.8);
+
+  &_projects {
+    width: 50rem;
+    height: auto;
+    overflow: hidden;
+    padding: 2rem;
+    background: $white;
+    margin: 0 auto;
+    margin-top: 10rem;
+    border-radius: 2px;
+    border: 2px solid $green-dark;
+  }
+
+  &_form {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+  }
+}
+
+.form_file_group {
+  width: 100%;
+  height: 10rem;
+  background: $input-back;
+  border-radius: 2px;
+
+  &_control {
+    display: none;
+  }
+
+  &_label {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+
+    & i {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+.image_preview {
+  width: 100%;
+  height: 10rem;
+  overflow: hidden;
+  position: relative;
+
+  &_img {
+    width: auto;
+    height: 100%;
+    display: block;
+    margin: 0 auto;
+    border-radius: 2px;
+    border: 2px solid #cccccc;
+  }
+
+  &_cross {
+    color: $green-dark;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 4rem;
+    height: 4rem;
+    background: #cccccc;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: $box-shadow;
+    opacity: 0;
+    transition: all 0.4s ease-in-out;
+  }
+}
+
+.image_preview_cross:hover,
+.image_preview_img:hover + .image_preview_cross {
+  opacity: 1;
+}
+
+// Media Queries
+@media only screen and (max-width: 606px) {
+  .modal_projects {
+    width: 90%;
+  }
+}

@@ -8,6 +8,7 @@
     "animate.css": "^3.7.0",
     "axios": "^0.18.0",
     "lightbox2": "^2.10.0",
+    "moment": "^2.22.2",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
     "react-redux": "^5.0.7",
