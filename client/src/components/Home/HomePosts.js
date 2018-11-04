@@ -10,7 +10,7 @@ class HomePosts extends Component {
         <div className="container">
           <div className="posts_info">
             <h1 className="section_title wow fadeInDown" data-wow-duration="2s">
-              Posts
+              Recent Posts
             </h1>
             <span
               className="section_underline wow zoomIn"
