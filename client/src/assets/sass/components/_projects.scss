@@ -190,10 +190,7 @@
 }
 
 // Media Queries
-@media only screen and (max-width: 435px) {
-  .projects_card {
-    height: auto;
-  }
+@media only screen and (max-width: 786px) {
   .projects_card_info {
     opacity: 1;
     padding: 2rem;
@@ -201,6 +198,12 @@
   .projects_card_info_content::before,
   .projects_card_info_content::after {
     display: none;
+  }
+}
+
+@media only screen and (max-width: 435px) {
+  .projects_card {
+    height: auto;
   }
   .projects_card_info_content_menu_item {
     width: 3.5rem;

@@ -4,6 +4,7 @@ import React from "react";
 import HomeHero from "./HomeHero";
 import HomeServices from "./HomeServices";
 import HomeProjects from "./HomeProjects";
+import HomePosts from "./HomePosts";
 
 const Homepage = () => {
   return (
@@ -11,6 +12,7 @@ const Homepage = () => {
       <HomeHero />
       <HomeServices />
       <HomeProjects />
+      <HomePosts />
     </React.Fragment>
   );
 };
