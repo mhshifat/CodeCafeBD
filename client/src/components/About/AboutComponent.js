@@ -8,6 +8,10 @@ import AboutMeLowerEdu from "./AboutMeLowerEdu";
 import AboutMeLowerSkills from "./AboutMeLowerSkills";
 
 class AboutComponent extends Component {
+  componentWillMount = () => {
+    window.scrollTo(0, 0);
+  };
+
   render() {
     return (
       <section className="about">

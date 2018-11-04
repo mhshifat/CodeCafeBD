@@ -11,6 +11,9 @@ import PostsComponent from "./components/Posts/PostsComponent";
 import ProjectsComponent from "./components/Projects/ProjectsComponent";
 import NotFoundComponent from "./components/NotFound/NotFoundComponent";
 import AboutComponent from "./components/About/AboutComponent";
+import ContactComponent from "./components/Contact/ContactComponent";
+import LoginComponent from "./components/Auth/LoginComponent";
+import RegisterComponent from "./components/Auth/RegisterComponent";
 
 class App extends Component {
   componentDidMount = () => {
@@ -34,6 +37,9 @@ class App extends Component {
                 <Route path="/forum" component={NotFoundComponent} />
                 <Route path="/shop" component={NotFoundComponent} />
                 <Route path="/about" component={AboutComponent} />
+                <Route path="/contact" component={ContactComponent} />
+                <Route path="/login" component={LoginComponent} />
+                <Route path="/register" component={RegisterComponent} />
               </Switch>
             </div>
           </div>

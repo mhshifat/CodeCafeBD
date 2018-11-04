@@ -5,6 +5,10 @@ import ProjectsNavbar from "./ProjectsNavbar";
 import ProjectsCard from "./ProjectsCard";
 
 class ProjectsComponent extends Component {
+  componentWillMount = () => {
+    window.scrollTo(0, 0);
+  };
+
   render() {
     return (
       <div className="projects">

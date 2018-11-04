@@ -72,7 +72,9 @@ a {
 }
 
 input,
-input:focus {
+input:focus,
+textarea,
+textarea:focus {
   border: none;
   outline: none;
 }
