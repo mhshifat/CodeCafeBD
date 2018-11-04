@@ -2,7 +2,7 @@
   width: 100%;
   height: auto;
   overflow: hidden;
-  padding: 5rem 0rem;
+  padding: 5rem 0;
 
   &_info {
     display: flex;
@@ -27,7 +27,7 @@
         width: 5rem;
         height: 100%;
         background: rgba(255, 255, 255, 0.5);
-        transform: translateX(-5rem) skew(-45deg);
+        transform: translateX(-10rem) skew(-45deg);
         transition: all 0.4s ease-in-out;
       }
 

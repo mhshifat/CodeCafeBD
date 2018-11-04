@@ -8,6 +8,9 @@ import * as serviceWorker from "./serviceWorker";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./assets/css/main.css";
 import "animate.css/animate.min.css";
+import "lightbox2/dist/css/lightbox.min.css";
+
+import "lightbox2/dist/js/lightbox-plus-jquery.min";
 
 // Import Store
 import store from "./Store/store";
