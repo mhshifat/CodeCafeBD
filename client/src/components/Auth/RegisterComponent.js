@@ -1,12 +1,37 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
+import { registerNewUserAction } from "../../Store/Actions/authActions";
 
 // Components
 import FormInputField from "../Form/FormInputField";
 import FormFullWidthBtn from "../Form/FormFullWidthBtn";
 
 class RegisterComponent extends Component {
+  state = {
+    formValue: {
+      username: "",
+      email: "",
+      password: ""
+    }
+  };
+
   componentWillMount = () => {
     window.scrollTo(0, 0);
+  };
+
+  onInputFieldChangeHandler = e => {
+    this.setState({
+      formValue: {
+        ...this.state.formValue,
+        [e.target.name]: e.target.value
+      }
+    });
+  };
+
+  onFormSubmitHandler = e => {
+    e.preventDefault();
+    this.props.registerNewUserAction(this.state.formValue, this.props.history);
   };
 
   render() {
@@ -22,13 +47,30 @@ class RegisterComponent extends Component {
                   <i className="fas fa-chevron-right" />
                 </h4>
               </div>
-              <form className="auth_wrapper_form">
-                <FormInputField type="text" for="username" label="Username" />
-                <FormInputField type="email" for="email" label="Email" />
+              <form
+                onSubmit={this.onFormSubmitHandler}
+                className="auth_wrapper_form"
+              >
+                <FormInputField
+                  type="text"
+                  for="username"
+                  label="Username"
+                  value={this.state.formValue.username}
+                  change={this.onInputFieldChangeHandler}
+                />
+                <FormInputField
+                  type="email"
+                  for="email"
+                  label="Email"
+                  value={this.state.formValue.email}
+                  change={this.onInputFieldChangeHandler}
+                />
                 <FormInputField
                   type="password"
                   for="password"
                   label="Password"
+                  value={this.state.formValue.password}
+                  change={this.onInputFieldChangeHandler}
                 />
                 <FormFullWidthBtn content="Register" />
               </form>
@@ -40,4 +82,7 @@ class RegisterComponent extends Component {
   }
 }
 
-export default RegisterComponent;
+export default connect(
+  null,
+  { registerNewUserAction }
+)(RegisterComponent);

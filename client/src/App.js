@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { WOW } from "wowjs";
 
 // Components
+import MessagesComponent from "./components/Messages/MessagesComponent";
 import TopNavbar from "./components/Navbar/TopNavbar";
 import SideNavbar from "./components/Navbar/SideNavbar";
 import Footer from "./components/Footer/Footer";
@@ -27,6 +28,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Fragment>
+          <MessagesComponent />
           <TopNavbar />
           <SideNavbar />
           <div className="app_root">

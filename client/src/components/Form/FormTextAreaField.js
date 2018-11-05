@@ -9,6 +9,7 @@ const FormTextAreaField = props => {
         className="form_textarea_group_control"
         placeholder={props.for}
         onChange={props.change}
+        value={props.value}
       />
       <label htmlFor={props.for} className="form_textarea_group_label">
         {props.label}

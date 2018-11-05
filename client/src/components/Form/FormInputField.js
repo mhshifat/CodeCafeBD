@@ -11,6 +11,7 @@ const FormInputField = props => {
         placeholder={props.for}
         name={props.for}
         onChange={props.change}
+        value={props.value}
       />
       <label htmlFor={props.for} className="form_input_group_label">
         {props.label}

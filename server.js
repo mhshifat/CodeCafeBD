@@ -12,6 +12,12 @@ import { name, version, description } from "./package.json";
 // Import Config Variables
 import { port } from "./config/config";
 
+// Import Routes
+import authRoutes from "./routes/Api/auth";
+
+// Connect Database
+import "./database/conn";
+
 // Initialize Express App
 const app = express();
 
@@ -29,6 +35,8 @@ app.get("/api", (req, res) => {
     description
   });
 });
+
+app.use("/api/auth", authRoutes);
 
 // For Production
 if (process.env.NODE_ENV === "production") {

@@ -1,0 +1,144 @@
+.messages {
+  width: auto;
+  height: auto;
+  overflow: hidden;
+  position: fixed;
+  top: 8rem;
+  right: -50rem;
+  padding: 2rem;
+  opacity: 0;
+  z-index: 1600;
+  animation: messages 5s ease-in-out;
+
+  &_error {
+    max-width: 30rem;
+    min-width: 20rem;
+    height: 4rem;
+    background: salmon;
+    border-radius: 3px;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    color: $white;
+    box-shadow: $box-shadow;
+    line-height: 2rem;
+    position: relative;
+
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0%;
+      height: 1px;
+      background: $white;
+      border-bottom-left-radius: 3px;
+      border-bottom-right-radius: 3px;
+      animation: messagesBorder 4.5s ease-in-out;
+    }
+
+    &:hover::before {
+      animation-play-state: paused;
+    }
+
+    & i {
+      margin-right: 0.5rem;
+    }
+  }
+
+  &_success {
+    max-width: 30rem;
+    min-width: 20rem;
+    height: 4rem;
+    background: $green;
+    border-radius: 3px;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    color: $white;
+    box-shadow: $box-shadow;
+    line-height: 2rem;
+    position: relative;
+
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0%;
+      height: 1px;
+      background: $white;
+      border-bottom-left-radius: 3px;
+      border-bottom-right-radius: 3px;
+      animation: messagesBorder 4.5s ease-in-out;
+    }
+
+    &:hover::before {
+      animation-play-state: paused;
+    }
+
+    & i {
+      margin-right: 0.5rem;
+    }
+  }
+}
+
+@keyframes messages {
+  0% {
+    opacity: 0;
+    right: -50rem;
+  }
+  20% {
+    opacity: 1;
+    right: 5rem;
+  }
+  30% {
+    opacity: 1;
+    right: 5rem;
+  }
+  40% {
+    opacity: 1;
+    right: 5rem;
+  }
+  50% {
+    opacity: 1;
+    right: 5rem;
+  }
+  60% {
+    opacity: 1;
+    right: 5rem;
+  }
+  70% {
+    opacity: 1;
+    right: 5rem;
+  }
+  80% {
+    opacity: 1;
+    right: 5rem;
+  }
+  100% {
+    opacity: 0;
+    right: -50rem;
+  }
+}
+
+@keyframes messagesBorder {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.messages:hover {
+  animation-play-state: paused;
+}
