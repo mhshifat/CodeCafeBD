@@ -26,6 +26,7 @@ app.use(helmet());
 app.use(morgan("tiny"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static("client/build"));
 
 // Setup Routes
 app.get("/api", (req, res) => {
@@ -39,12 +40,9 @@ app.get("/api", (req, res) => {
 app.use("/api/auth", authRoutes);
 
 // For Production
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  });
-}
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+});
 
 // Listening For Port
 app.listen(port, () => {
