@@ -62,10 +62,12 @@ class App extends Component {
                   component={AlreadyLoggedIn(RegisterComponent)}
                 />
                 <Route
+                  exact
                   path="/dashboard/settings"
                   component={NeedToBeLoggedIn(DashboardSettings)}
                 />
                 <Route
+                  exact
                   path="/dashboard/projects"
                   component={NeedToBeLoggedIn(DashboardProjects)}
                 />
