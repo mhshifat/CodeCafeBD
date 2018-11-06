@@ -1,12 +1,36 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
+import { loginTheUserAction } from "../../Store/Actions/authActions";
 
 // Components
 import FormInputField from "../Form/FormInputField";
 import FormFullWidthBtn from "../Form/FormFullWidthBtn";
 
 class LoginComponent extends Component {
+  state = {
+    formValue: {
+      email: "",
+      password: ""
+    }
+  };
+
   componentWillMount = () => {
     window.scrollTo(0, 0);
+  };
+
+  onInputFieldChangeHandler = e => {
+    this.setState({
+      formValue: {
+        ...this.state.formValue,
+        [e.target.name]: e.target.value
+      }
+    });
+  };
+
+  onFormSubmitHandler = e => {
+    e.preventDefault();
+    this.props.loginTheUserAction(this.state.formValue, this.props.history);
   };
 
   render() {
@@ -22,12 +46,23 @@ class LoginComponent extends Component {
                   <i className="fas fa-chevron-right" />
                 </h4>
               </div>
-              <form className="auth_wrapper_form">
-                <FormInputField type="email" for="email" label="Email" />
+              <form
+                onSubmit={this.onFormSubmitHandler}
+                className="auth_wrapper_form"
+              >
+                <FormInputField
+                  type="email"
+                  for="email"
+                  label="Email"
+                  value={this.state.formValue.email}
+                  change={this.onInputFieldChangeHandler}
+                />
                 <FormInputField
                   type="password"
                   for="password"
                   label="Password"
+                  value={this.state.formValue.password}
+                  change={this.onInputFieldChangeHandler}
                 />
                 <FormFullWidthBtn content="Login" />
               </form>
@@ -39,4 +74,7 @@ class LoginComponent extends Component {
   }
 }
 
-export default LoginComponent;
+export default connect(
+  null,
+  { loginTheUserAction }
+)(LoginComponent);

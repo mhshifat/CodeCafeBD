@@ -1,4 +1,10 @@
-import { ENABLE_LOADER, ERROR_MESSAGES, SUCCESS_MESSAGE } from "./types";
+import {
+  ENABLE_LOADER,
+  ERROR_MESSAGES,
+  SUCCESS_MESSAGE,
+  CURRENT_USER,
+  LOGOUT_USER
+} from "./types";
 import axios from "axios";
 
 export const registerNewUserAction = (userData, history) => async dispatch => {
@@ -14,4 +20,40 @@ export const registerNewUserAction = (userData, history) => async dispatch => {
       dispatch({ type: ERROR_MESSAGES, payload: err.response.data.errors });
     }
   }
+};
+
+export const loginTheUserAction = (userData, history) => async dispatch => {
+  try {
+    dispatch({ type: ENABLE_LOADER });
+    const res = await axios.post("/api/auth/login", userData);
+    if (res.data) {
+      dispatch({ type: CURRENT_USER, payload: res.data.user });
+      history.push("/dashboard/settings");
+      dispatch({ type: SUCCESS_MESSAGE, payload: res.data.data });
+    }
+  } catch (err) {
+    if (!err.response.data.success) {
+      dispatch({ type: ERROR_MESSAGES, payload: err.response.data.errors });
+    }
+  }
+};
+
+export const getCurrentUser = token => async dispatch => {
+  try {
+    const res = await axios.get(`/api/auth/user/${token}`);
+    if (res.data) {
+      dispatch({ type: CURRENT_USER, payload: res.data.user });
+    }
+  } catch (err) {}
+};
+
+export const logoutTheUser = history => async dispatch => {
+  try {
+    const res = await axios.get(`/api/auth/logout`);
+    if (res.data) {
+      history.push("/login");
+      dispatch({ type: LOGOUT_USER });
+      dispatch({ type: SUCCESS_MESSAGE, payload: res.data.data });
+    }
+  } catch (err) {}
 };

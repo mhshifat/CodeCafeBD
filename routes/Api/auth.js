@@ -5,6 +5,7 @@ import bcrypt from "bcryptjs";
 
 // Import Validators
 import registerValidator from "../../validators/registerValidator";
+import loginValidator from "../../validators/loginValidator";
 
 // Import Models
 import User from "../../models/User";
@@ -22,12 +23,62 @@ const router = express.Router();
 // ========== Routes ==========
 // ============================
 
-// Route ==> (GET) ==> /api/auth/user
-router.get("/user", async (req, res) => {
+// Route ==> (GET) ==> /api/auth/user/token
+router.get("/user/:token", async (req, res) => {
   try {
-    res.status(200).json({ success: true });
+    const token = req.params.token.split("=");
+    if (token[0] === "ccbd_user") {
+      const decodeUser = await jwt.verify(token[1], process.env.JWT_SECRET);
+      return res.status(200).json({
+        success: true,
+        user: decodeUser
+      });
+    }
   } catch (err) {
     console.log(err);
+  }
+});
+
+// Route ==> (POST) ==> /api/auth/login
+router.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const { isValid, errors } = loginValidator(req.body);
+    if (!isValid) return res.status(400).json({ success: false, errors });
+    const getExistingUser = await User.findOne({ email });
+    if (!getExistingUser) {
+      errors.email = "A user of this email doesn't exist";
+      return res.status(400).json({ success: false, errors });
+    }
+    const verifyPwd = await bcrypt.compare(password, getExistingUser.password);
+    if (!verifyPwd) {
+      errors.password = "Provided password doesn't match";
+      return res.status(400).json({ success: false, errors });
+    }
+    const currentUser = {
+      id: getExistingUser._id,
+      username: getExistingUser.username,
+      email: getExistingUser.email,
+      isAdmin: getExistingUser.isAdmin
+    };
+    const token = await jwt.sign(currentUser, process.env.JWT_SECRET);
+    res.cookie("ccbd_user", token, {
+      maxAge: 24 * 30 * 3600000
+    });
+    return res.status(200).json({
+      success: true,
+      data: {
+        message: `Welcome, you are now logged in`
+      },
+      user: currentUser
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      errors: {
+        error: "Something went wrong, please try again later"
+      }
+    });
   }
 });
 
@@ -86,10 +137,19 @@ router.get("/verify/:token", async (req, res) => {
       res.redirect("/login");
     }
   } catch (err) {
-    res.status(400).json({
-      message: "Your account validation time has expired"
-    });
+    res.redirect("/register");
   }
+});
+
+// Route ==> (GET) ==> /api/auth/logout
+router.get("/logout", (req, res) => {
+  res.clearCookie("ccbd_user");
+  res.status(200).json({
+    success: true,
+    data: {
+      message: "You have been logged out"
+    }
+  });
 });
 
 // Export Router

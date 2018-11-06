@@ -96,6 +96,9 @@ export const emailVerifyTemplate = (url, token, username) => {
                               <tr>
                                   <td align="center" style="border-collapse: collapse;padding: 0;"><a href="${url}/api/auth/verify/${token}" target="_blank" class="verify-link" style="text-decoration: none;display: inline-block;padding: 10px 20px;background-color: #28b485;color: #ffffff;border-radius: 3px;margin: 20px 0 50px 0;font-size: 15px;">Verify Your Email</a></td>
                               </tr>
+                              <tr>
+                                  <td align="center" style="border-collapse: collapse;padding: 0;"><h4 class="verify-desc" style="font-size: 15px;color: #868686;font-weight: 400;">Email validation time 1 hour.</h4></td>
+                              </tr>
                           </tbody>
                       </table>
                   </td>

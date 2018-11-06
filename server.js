@@ -5,6 +5,7 @@ import color from "colors";
 import morgan from "morgan";
 import helmet from "helmet";
 import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
 
 // Import Package.json
 import { name, version, description } from "./package.json";
@@ -22,6 +23,7 @@ import "./database/conn";
 const app = express();
 
 // Use Middlewares
+app.use(cookieParser());
 app.use(helmet());
 app.use(morgan("tiny"));
 app.use(bodyParser.json());

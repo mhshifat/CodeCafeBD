@@ -41,13 +41,21 @@ class TopNavbar extends Component {
           icon="hamburger.svg"
         />
         <div className="top_navbar_menu">
-          <TopNavbarIcon icon="envelop.svg" width="1.8rem" height="1.8rem" />
-          <TopNavbarIcon
-            icon="notification.svg"
-            width="2rem"
-            height="2rem"
-            ml="1rem"
-          />
+          {this.props.system.isUserLoggedIn && (
+            <React.Fragment>
+              <TopNavbarIcon
+                icon="envelop.svg"
+                width="1.8rem"
+                height="1.8rem"
+              />
+              <TopNavbarIcon
+                icon="notification.svg"
+                width="2rem"
+                height="2rem"
+                ml="1rem"
+              />
+            </React.Fragment>
+          )}
           <TopNavbarIcon
             icon="boy.svg"
             className="top_navbar_pro_icon"
@@ -57,8 +65,18 @@ class TopNavbar extends Component {
             click={this.onNavbarIconClickHandler}
           >
             <TopNavbarIconSupporter
-              name="Guest User"
-              email="example@example.com"
+              name={
+                this.props.system.user !== undefined &&
+                this.props.system.user.username
+                  ? this.props.system.user.username
+                  : "Guest User"
+              }
+              email={
+                this.props.system.user !== undefined &&
+                this.props.system.user.email
+                  ? this.props.system.user.email
+                  : "example@example.com"
+              }
             />
           </TopNavbarIcon>
         </div>
@@ -67,7 +85,13 @@ class TopNavbar extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    system: state.system
+  };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   { changeSidebarStateToOpen }
 )(TopNavbar);

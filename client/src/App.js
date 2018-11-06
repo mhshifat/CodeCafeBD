@@ -1,6 +1,9 @@
 import React, { Component, Fragment } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { connect } from "react-redux";
 import { WOW } from "wowjs";
+
+import { getCurrentUser } from "./Store/Actions/authActions";
 
 // Components
 import MessagesComponent from "./components/Messages/MessagesComponent";
@@ -16,8 +19,17 @@ import ContactComponent from "./components/Contact/ContactComponent";
 import LoginComponent from "./components/Auth/LoginComponent";
 import RegisterComponent from "./components/Auth/RegisterComponent";
 import DashboardProjects from "./components/Dashboard/Projects/DashboardProjects";
+import DashboardSettings from "./components/Dashboard/Settings/DashboardSettings";
+import NeedToBeLoggedIn from "./components/Protected/NeedToBeLoggedIn";
+import AlreadyLoggedIn from "./components/Protected/AlreadyLoggedIn";
 
 class App extends Component {
+  componentWillMount = () => {
+    if (document.cookie) {
+      this.props.getCurrentUser(document.cookie);
+    }
+  };
+
   componentDidMount = () => {
     new WOW({
       live: false
@@ -41,15 +53,21 @@ class App extends Component {
                 <Route path="/shop" component={NotFoundComponent} />
                 <Route path="/about" component={AboutComponent} />
                 <Route path="/contact" component={ContactComponent} />
-                <Route path="/login" component={LoginComponent} />
-                <Route path="/register" component={RegisterComponent} />
+                <Route
+                  path="/login"
+                  component={AlreadyLoggedIn(LoginComponent)}
+                />
+                <Route
+                  path="/register"
+                  component={AlreadyLoggedIn(RegisterComponent)}
+                />
                 <Route
                   path="/dashboard/settings"
-                  component={NotFoundComponent}
+                  component={NeedToBeLoggedIn(DashboardSettings)}
                 />
                 <Route
                   path="/dashboard/projects"
-                  component={DashboardProjects}
+                  component={NeedToBeLoggedIn(DashboardProjects)}
                 />
                 <Route component={NotFoundComponent} />
               </Switch>
@@ -62,4 +80,7 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(
+  null,
+  { getCurrentUser }
+)(App);

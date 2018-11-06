@@ -11,7 +11,7 @@
   animation: messages 5s ease-in-out;
 
   &_error {
-    max-width: 30rem;
+    max-width: 35rem;
     min-width: 20rem;
     height: 4rem;
     background: salmon;
@@ -46,12 +46,12 @@
     }
 
     & i {
-      margin-right: 0.5rem;
+      margin-right: 0.8rem;
     }
   }
 
   &_success {
-    max-width: 30rem;
+    max-width: 35rem;
     min-width: 20rem;
     height: 4rem;
     background: $green;
@@ -86,7 +86,7 @@
     }
 
     & i {
-      margin-right: 0.5rem;
+      margin-right: 0.8rem;
     }
   }
 }
