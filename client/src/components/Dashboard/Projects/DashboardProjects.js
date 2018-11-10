@@ -1,13 +1,31 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import moment from "moment";
 
 // Components
 import ModalBtn from "../../Modal/ModalBtn";
 import ModalComponent from "../../Modal/ModalComponent";
 import ModalContentForAddingNewProject from "../../Modal/ModalContentForAddingNewProject";
 
+import {
+  addProjectAction,
+  deleteProjectAction,
+  updateProjectAction
+} from "../../../Store/Actions/projectActions";
+
 class DashboardProjects extends Component {
   state = {
-    isModalOpen: false
+    isModalOpen: false,
+    isModalAboutUpdatingProject: false,
+    formValue: {
+      id: "",
+      name: "",
+      category: "",
+      website: "",
+      github: ""
+    },
+    image: {},
+    imagePreview: ""
   };
 
   componentWillMount = () => {
@@ -26,6 +44,117 @@ class DashboardProjects extends Component {
         isModalOpen: false
       });
     }
+  };
+
+  onImagePreviewChangeHandler = e => {
+    if (e.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = data => {
+        this.setState({
+          ...this.state,
+          imagePreview: data.target.result
+        });
+      };
+      reader.readAsDataURL(e.target.files[0]);
+      this.setState({
+        ...this.state,
+        image: e.target.files[0]
+      });
+    }
+  };
+
+  onImageCrossClickHandler = e => {
+    this.setState({
+      ...this.state,
+      imagePreview: ""
+    });
+  };
+
+  onInputChangeHandler = e => {
+    this.setState({
+      formValue: {
+        ...this.state.formValue,
+        [e.target.name]: e.target.value
+      }
+    });
+  };
+
+  onFormSubmitHandler = async e => {
+    e.preventDefault();
+    const data = { ...this.state.formValue };
+    data.user = document.cookie.split("=")[1];
+    data.image = this.state.image;
+    const newProject = new FormData();
+    newProject.append("files", this.state.image);
+    newProject.append("user", data.user);
+    newProject.append("name", data.name);
+    newProject.append("category", data.category);
+    newProject.append("website", data.website);
+    newProject.append("github", data.github);
+    const res = await this.props.addProjectAction(newProject);
+    if (res) {
+      this.setState({
+        ...this.state,
+        isModalOpen: false,
+        imagePreview: "",
+        formValue: {
+          name: "",
+          category: "",
+          website: "",
+          github: ""
+        }
+      });
+    }
+  };
+
+  onTrashClickHandler = id => () => {
+    this.props.deleteProjectAction(id);
+  };
+
+  onEditClickHandler = project => () => {
+    this.setState({
+      isModalOpen: true,
+      formValue: {
+        id: project._id,
+        name: project.name,
+        category: project.category,
+        website: project.website,
+        github: project.github
+      },
+      imagePreview: project.image
+    });
+  };
+
+  onProjectUpdateHandler = id => async e => {
+    try {
+      e.preventDefault();
+      const project = { ...this.state.formValue };
+      project.id = id;
+      project.image = this.state.image;
+      const updateProject = new FormData();
+      updateProject.append("files", project.image);
+      updateProject.append("name", project.name);
+      updateProject.append("category", project.category);
+      updateProject.append("website", project.website);
+      updateProject.append("github", project.github);
+      const res = await this.props.updateProjectAction(
+        project.id,
+        updateProject
+      );
+      if (res) {
+        this.setState({
+          ...this.state,
+          isModalOpen: false,
+          imagePreview: "",
+          formValue: {
+            name: "",
+            category: "",
+            website: "",
+            github: ""
+          }
+        });
+      }
+    } catch (err) {}
   };
 
   render() {
@@ -76,9 +205,9 @@ class DashboardProjects extends Component {
               </th>
             </tr>
           </thead>
-          {/* <tbody>
-            {projects.length > 0 &&
-              projects.map((item, index) => (
+          <tbody>
+            {this.props.projects.projects.length > 0 &&
+              this.props.projects.projects.map((item, index) => (
                 <tr key={index}>
                   <td>
                     <div className="d_projects_col">{index + 1}</div>
@@ -106,17 +235,31 @@ class DashboardProjects extends Component {
                         onClick={this.onTrashClickHandler(item._id)}
                         className="fas fa-trash d_action"
                       />
-                      <i className="fas fa-edit d_action" />
+                      <i
+                        className="fas fa-edit d_action"
+                        onClick={this.onEditClickHandler(item)}
+                      />
                     </div>
                   </td>
                 </tr>
               ))}
-          </tbody> */}
+          </tbody>
         </table>
         <ModalBtn click={this.onModalBtnClickHandler} />
         {this.state.isModalOpen && (
           <ModalComponent click={this.onModalBackClickHandler}>
-            <ModalContentForAddingNewProject />
+            <ModalContentForAddingNewProject
+              form={this.state.formValue}
+              change={this.onInputChangeHandler}
+              submit={
+                this.state.formValue.id
+                  ? this.onProjectUpdateHandler(this.state.formValue.id)
+                  : this.onFormSubmitHandler
+              }
+              onImageChange={this.onImagePreviewChangeHandler}
+              imagePreview={this.state.imagePreview}
+              onImageCross={this.onImageCrossClickHandler}
+            />
           </ModalComponent>
         )}
       </section>
@@ -124,4 +267,13 @@ class DashboardProjects extends Component {
   }
 }
 
-export default DashboardProjects;
+const mapStateToProps = state => {
+  return {
+    projects: state.projects
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { addProjectAction, deleteProjectAction, updateProjectAction }
+)(DashboardProjects);

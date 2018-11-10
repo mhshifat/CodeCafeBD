@@ -5,7 +5,8 @@ import {
   ERROR_MESSAGES,
   SUCCESS_MESSAGE,
   CURRENT_USER,
-  LOGOUT_USER
+  LOGOUT_USER,
+  DISABLE_LOADER
 } from "../Actions/types";
 
 const initialState = {
@@ -26,17 +27,21 @@ const systemReducer = (state = initialState, action) => {
     case SIDEBAR_STATE_CLOSE:
       return { ...state, isSidebarOpen: false };
     case ENABLE_LOADER:
-      return { isLoaderOpen: !state.isLoaderOpen };
+      return { ...state, isLoaderOpen: true };
+    case DISABLE_LOADER:
+      return { ...state, isLoaderOpen: false };
     case ERROR_MESSAGES:
       return {
         ...state,
-        isLoaderOpen: false,
-        messages: { ...state.messages, success: {}, errors: action.payload }
+        messages: {
+          ...state.messages,
+          success: {},
+          errors: action.payload
+        }
       };
     case SUCCESS_MESSAGE:
       return {
         ...state,
-        isLoaderOpen: false,
         messages: { ...state.messages, errors: {}, success: action.payload }
       };
     case CURRENT_USER:

@@ -6,7 +6,7 @@ class MessagesComponent extends Component {
     return (
       <React.Fragment>
         {this.props.system.messages &&
-          this.props.system.messages.errors !== undefined && (
+          Object.keys(this.props.system.messages.errors).length > 0 && (
             <div className="messages">
               {Object.values(this.props.system.messages.errors).map(
                 (message, index) => (
@@ -18,7 +18,7 @@ class MessagesComponent extends Component {
             </div>
           )}
         {this.props.system.messages &&
-          this.props.system.messages.success !== undefined && (
+          Object.keys(this.props.system.messages.success).length > 0 && (
             <div className="messages">
               {Object.values(this.props.system.messages.success).map(
                 (message, index) => (

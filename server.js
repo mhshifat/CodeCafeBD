@@ -1,6 +1,7 @@
 // Import Dependencies
 import path from "path";
 import express from "express";
+import fileUpload from "express-fileupload";
 import color from "colors";
 import morgan from "morgan";
 import helmet from "helmet";
@@ -15,6 +16,7 @@ import { port } from "./config/config";
 
 // Import Routes
 import authRoutes from "./routes/Api/auth";
+import projectRoutes from "./routes/Api/projects";
 
 // Connect Database
 import "./database/conn";
@@ -23,6 +25,7 @@ import "./database/conn";
 const app = express();
 
 // Use Middlewares
+app.use(fileUpload());
 app.use(cookieParser());
 app.use(helmet());
 app.use(morgan("tiny"));
@@ -39,6 +42,7 @@ app.get("/api", (req, res) => {
 });
 
 app.use("/api/auth", authRoutes);
+app.use("/api/projects", projectRoutes);
 
 // For Production
 if (process.env.NODE_ENV === "production") {

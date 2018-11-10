@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { WOW } from "wowjs";
 
 import { getCurrentUser } from "./Store/Actions/authActions";
+import { getAllProjects } from "./Store/Actions/projectActions";
 
 // Components
 import MessagesComponent from "./components/Messages/MessagesComponent";
@@ -27,6 +28,7 @@ class App extends Component {
   componentWillMount = () => {
     if (document.cookie) {
       this.props.getCurrentUser(document.cookie);
+      this.props.getAllProjects();
     }
   };
 
@@ -84,5 +86,5 @@ class App extends Component {
 
 export default connect(
   null,
-  { getCurrentUser }
+  { getCurrentUser, getAllProjects }
 )(App);

@@ -4,18 +4,47 @@ import React from "react";
 import FormFileInputField from "../Form/FormFileInputField";
 import FormInputField from "../Form/FormInputField";
 import FormFullWidthBtn from "../Form/FormFullWidthBtn";
-// import ModalImagePreview from "../Modal/ModalImagePreview";
+import ModalImagePreview from "../Modal/ModalImagePreview";
 
 const ModalContentForAddingNewProject = props => {
   return (
     <div className="modal_projects">
-      <form className="modal_form">
-        <FormFileInputField />
-        {/* <ModalImagePreview /> */}
-        <FormInputField type="text" for="name" label="Name" />
-        <FormInputField type="text" for="category" label="Category" />
-        <FormInputField type="text" for="website" label="Website" />
-        <FormInputField type="text" for="github" label="Github" />
+      <form onSubmit={props.submit} className="modal_form">
+        {!props.imagePreview && (
+          <FormFileInputField change={props.onImageChange} />
+        )}
+        <ModalImagePreview
+          onImageCross={props.onImageCross}
+          imagePreview={props.imagePreview}
+        />
+        <FormInputField
+          type="text"
+          for="name"
+          label="Name"
+          value={props.form.name}
+          change={props.change}
+        />
+        <FormInputField
+          type="text"
+          for="category"
+          label="Category"
+          value={props.form.category}
+          change={props.change}
+        />
+        <FormInputField
+          type="text"
+          for="website"
+          label="Website"
+          value={props.form.website}
+          change={props.change}
+        />
+        <FormInputField
+          type="text"
+          for="github"
+          label="Github"
+          value={props.form.github}
+          change={props.change}
+        />
         <FormFullWidthBtn content="Save project" />
       </form>
     </div>

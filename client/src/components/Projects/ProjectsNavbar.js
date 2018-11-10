@@ -5,56 +5,15 @@ import ProjectNavbarCatsPrevious from "./ProjectNavbarCatsPrevious";
 import ProjectNavbarCatsNext from "./ProjectNavbarCatsNext";
 
 class ProjectsNavbar extends Component {
-  state = {
-    currentProjectCategory: "all",
-    catsStartNumber: 0,
-    catsEndNumber: 3,
-    catsThatWillBeShown: ["NodeJS", "ReactJS", "VueJS"],
-    categories: ["NodeJS", "ReactJS", "VueJS", "AngularJS", "JavaScript"]
-  };
-
-  onProjectsNavbarItemClickHandler = e => {
-    this.setState({
-      ...this.state,
-      currentProjectCategory: e.target.textContent.toLowerCase()
-    });
-  };
-
   renderProjectNavbarItems = () => {
-    return this.state.catsThatWillBeShown.map((cat, index) => (
+    return this.props.state.catsThatWillBeShown.map((cat, index) => (
       <ProjectsNavbarItem
         key={index}
-        click={this.onProjectsNavbarItemClickHandler}
-        currentCat={this.state.currentProjectCategory}
+        click={this.props.projectNavbar}
+        currentCat={this.props.state.currentProjectCategory}
         content={cat}
       />
     ));
-  };
-
-  onPreviousClickHandler = () => {
-    const cats = this.state.categories.slice(
-      this.state.catsStartNumber - 1,
-      this.state.catsEndNumber - 1
-    );
-    this.setState({
-      currentProjectCategory: cats[0].toLowerCase(),
-      catsStartNumber: this.state.catsStartNumber - 1,
-      catsEndNumber: this.state.catsEndNumber - 1,
-      catsThatWillBeShown: cats
-    });
-  };
-
-  onNextClickHandler = () => {
-    const cats = this.state.categories.slice(
-      this.state.catsStartNumber + 1,
-      this.state.catsEndNumber + 1
-    );
-    this.setState({
-      currentProjectCategory: cats[cats.length - 1].toLowerCase(),
-      catsStartNumber: this.state.catsStartNumber + 1,
-      catsEndNumber: this.state.catsEndNumber + 1,
-      catsThatWillBeShown: cats
-    });
   };
 
   render() {
@@ -65,18 +24,18 @@ class ProjectsNavbar extends Component {
           data-wow-duration="2s"
         >
           <ProjectNavbarCatsPrevious
-            state={this.state}
-            click={this.onPreviousClickHandler}
+            state={this.props.state}
+            click={this.props.previous}
           />
           <ProjectsNavbarItem
-            click={this.onProjectsNavbarItemClickHandler}
-            currentCat={this.state.currentProjectCategory}
+            click={this.props.projectClick}
+            currentCat={this.props.state.currentProjectCategory}
             content="All"
           />
           {this.renderProjectNavbarItems()}
           <ProjectNavbarCatsNext
-            state={this.state}
-            click={this.onNextClickHandler}
+            state={this.props.state}
+            click={this.props.next}
           />
         </span>
       </div>
