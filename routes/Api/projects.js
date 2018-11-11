@@ -146,20 +146,14 @@ router.post("/update/:id", async (req, res) => {
         errors.image = "Please upload a valid image file";
         return res.status(400).json({ success: false, errors });
       }
-      if (fs.existsSync(path.resolve("client", "build"))) {
-        image.mv(`./client/build/images/projects/${imageNameWithDates}`);
-      } else if (fs.existsSync(path.resolve("client", "public"))) {
-        image.mv(`./client/public/images/projects/${imageNameWithDates}`);
-      }
-      if (fs.existsSync(path.resolve("client", "build"))) {
-        fs.unlinkSync(
-          `./client/build/images/projects/${getExistingProject.image}`
-        );
-      } else if (fs.existsSync(path.resolve("client", "public"))) {
-        fs.unlinkSync(
-          `./client/public/images/projects/${getExistingProject.image}`
-        );
-      }
+      image.mv(`./client/build/images/projects/${imageNameWithDates}`);
+      image.mv(`./client/public/images/projects/${imageNameWithDates}`);
+      fs.unlinkSync(
+        `./client/build/images/projects/${getExistingProject.image}`
+      );
+      fs.unlinkSync(
+        `./client/public/images/projects/${getExistingProject.image}`
+      );
     }
     const projectUpdate = {
       name: req.body.name,
