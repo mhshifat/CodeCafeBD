@@ -1,46 +1,41 @@
-import React, { Component } from "react";
+import React from "react";
 
 import ProjectsNavbarItem from "./ProjectsNavbarItem";
 import ProjectNavbarCatsPrevious from "./ProjectNavbarCatsPrevious";
 import ProjectNavbarCatsNext from "./ProjectNavbarCatsNext";
 
-class ProjectsNavbar extends Component {
-  renderProjectNavbarItems = () => {
-    return this.props.state.catsThatWillBeShown.map((cat, index) => (
+const ProjectsNavbar = props => {
+  const renderProjectNavbarItems = () => {
+    return props.mainState.catsThatWillBeShown.map((cat, index) => (
       <ProjectsNavbarItem
         key={index}
-        click={this.props.projectNavbar}
-        currentCat={this.props.state.currentProjectCategory}
+        click={props.projectNavbar}
+        currentCat={props.mainState.currentProjectCategory}
         content={cat}
       />
     ));
   };
-
-  render() {
-    return (
-      <div className="projects_navbar">
-        <span
-          className="projects_navbar_wrapper wow zoomIn"
-          data-wow-duration="2s"
-        >
-          <ProjectNavbarCatsPrevious
-            state={this.props.state}
-            click={this.props.previous}
-          />
-          <ProjectsNavbarItem
-            click={this.props.projectClick}
-            currentCat={this.props.state.currentProjectCategory}
-            content="All"
-          />
-          {this.renderProjectNavbarItems()}
-          <ProjectNavbarCatsNext
-            state={this.props.state}
-            click={this.props.next}
-          />
-        </span>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="projects_navbar">
+      <span
+        className={`projects_navbar_wrapper wow zoomIn ${props.mainState
+          .categories.length < 3 && "plr-2"}`}
+        data-wow-duration="2s"
+      >
+        <ProjectNavbarCatsPrevious
+          state={props.mainState}
+          click={props.previous}
+        />
+        <ProjectsNavbarItem
+          click={props.projectClick}
+          currentCat={props.mainState.currentProjectCategory}
+          content="All"
+        />
+        {renderProjectNavbarItems()}
+        <ProjectNavbarCatsNext state={props.mainState} click={props.next} />
+      </span>
+    </div>
+  );
+};
 
 export default ProjectsNavbar;

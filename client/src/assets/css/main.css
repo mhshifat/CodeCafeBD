@@ -426,6 +426,10 @@ table {
 .image_preview_img:hover + .image_preview_cross {
   opacity: 1; }
 
+.plr-2 {
+  padding-left: 20px;
+  padding-right: 20px; }
+
 @media only screen and (max-width: 606px) {
   .modal_projects {
     width: 90%; } }
@@ -959,7 +963,7 @@ table {
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(40, 180, 133, 0.3);
+      background: rgba(16, 16, 16, 0.6);
       padding: 5rem;
       overflow: hidden;
       z-index: 5;

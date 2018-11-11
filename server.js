@@ -17,6 +17,7 @@ import { port } from "./config/config";
 // Import Routes
 import authRoutes from "./routes/Api/auth";
 import projectRoutes from "./routes/Api/projects";
+import defaultRoutes from "./routes/Api/default";
 
 // Connect Database
 import "./database/conn";
@@ -43,6 +44,7 @@ app.get("/api", (req, res) => {
 
 app.use("/api/auth", authRoutes);
 app.use("/api/projects", projectRoutes);
+app.use("/api", defaultRoutes);
 
 // For Production
 if (process.env.NODE_ENV === "production") {
