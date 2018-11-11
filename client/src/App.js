@@ -7,6 +7,7 @@ import { getCurrentUser } from "./Store/Actions/authActions";
 import { getAllProjects } from "./Store/Actions/projectActions";
 
 // Components
+import LoaderComponent from "./components/Loader/LoaderComponent";
 import MessagesComponent from "./components/Messages/MessagesComponent";
 import TopNavbar from "./components/Navbar/TopNavbar";
 import SideNavbar from "./components/Navbar/SideNavbar";
@@ -26,6 +27,15 @@ import AlreadyLoggedIn from "./components/Protected/AlreadyLoggedIn";
 
 class App extends Component {
   componentWillMount = () => {
+    window.addEventListener("load", () => {
+      const getLoader = document.querySelector(".loader");
+      setTimeout(() => {
+        getLoader.classList.add("loaderAnimation");
+        setTimeout(() => {
+          getLoader.style.setProperty("display", "none");
+        }, 1800);
+      }, 3000);
+    });
     if (document.cookie) {
       this.props.getCurrentUser(document.cookie);
       this.props.getAllProjects();
@@ -42,6 +52,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Fragment>
+          <LoaderComponent />
           <MessagesComponent />
           <TopNavbar />
           <SideNavbar />

@@ -33,7 +33,6 @@ export const sendContactMessage = formData => async dispatch => {
       return res.data;
     }
   } catch (err) {
-    console.log(err.response);
     if (!err.response.data.success) {
       dispatch({ type: ERROR_MESSAGES, payload: err.response.data.errors });
       setTimeout(() => {
