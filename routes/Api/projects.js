@@ -72,11 +72,8 @@ router.post("/add", async (req, res) => {
     const image = req.files.files;
     const imgName = image.name;
     const imageNameWithDates = "CODECAFEBD-" + Date.now() + "-" + imgName;
-    if (fs.existsSync(path.resolve("client", "build"))) {
-      image.mv(`./client/build/images/projects/${imageNameWithDates}`);
-    } else if (fs.existsSync(path.resolve("client", "public"))) {
-      image.mv(`./client/public/images/projects/${imageNameWithDates}`);
-    }
+    image.mv(`./client/build/images/projects/${imageNameWithDates}`);
+    image.mv(`./client/public/images/projects/${imageNameWithDates}`);
     const newProject = {
       user: getUserDetails._id,
       name: req.body.name,
