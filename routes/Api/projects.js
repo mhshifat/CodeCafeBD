@@ -106,11 +106,6 @@ router.post("/add", async (req, res) => {
 router.get("/delete/:id", async (req, res) => {
   try {
     const deleteProject = await Project.findByIdAndDelete(req.params.id);
-    if (fs.existsSync(path.resolve("client", "build"))) {
-      fs.unlinkSync(`./client/build/images/projects/${deleteProject.image}`);
-    } else if (fs.existsSync(path.resolve("client", "public"))) {
-      fs.unlinkSync(`./client/public/images/projects/${deleteProject.image}`);
-    }
     return res.status(200).json({
       success: true,
       data: {
@@ -148,12 +143,6 @@ router.post("/update/:id", async (req, res) => {
       }
       image.mv(`./client/build/images/projects/${imageNameWithDates}`);
       image.mv(`./client/public/images/projects/${imageNameWithDates}`);
-      fs.unlinkSync(
-        `./client/build/images/projects/${getExistingProject.image}`
-      );
-      fs.unlinkSync(
-        `./client/public/images/projects/${getExistingProject.image}`
-      );
     }
     const projectUpdate = {
       name: req.body.name,
