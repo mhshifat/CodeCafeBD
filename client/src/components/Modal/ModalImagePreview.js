@@ -10,7 +10,7 @@ const ModalImagePreview = props => {
               props.imagePreview.endsWith(".png") ||
               props.imagePreview.endsWith(".jpg") ||
               props.imagePreview.endsWith(".jpeg")
-                ? `/images/projects/${props.imagePreview}`
+                ? props.imagePreview
                 : props.imagePreview
             }
             alt="preview"

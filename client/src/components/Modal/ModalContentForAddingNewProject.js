@@ -1,7 +1,6 @@
 import React from "react";
 
 // Components
-import FormFileInputField from "../Form/FormFileInputField";
 import FormInputField from "../Form/FormInputField";
 import FormFullWidthBtn from "../Form/FormFullWidthBtn";
 import ModalImagePreview from "../Modal/ModalImagePreview";
@@ -11,7 +10,13 @@ const ModalContentForAddingNewProject = props => {
     <div className="modal_projects">
       <form onSubmit={props.submit} className="modal_form">
         {!props.imagePreview && (
-          <FormFileInputField change={props.onImageChange} />
+          <FormInputField
+            type="text"
+            for="image"
+            label="Image"
+            value={props.form.image}
+            change={props.onImageChange}
+          />
         )}
         <ModalImagePreview
           onImageCross={props.onImageCross}

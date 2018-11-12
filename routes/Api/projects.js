@@ -46,18 +46,6 @@ router.post("/add", async (req, res) => {
   try {
     const { isValid, errors } = projectValidator(req.body);
     if (!isValid) return res.status(400).json({ success: false, errors });
-    if (req.files === null) {
-      errors.image = "Please upload an image of the project";
-      return res.status(400).json({ success: false, errors });
-    }
-    const validImgFormat = [".png", ".jpeg", ".jpg"];
-    const uploadedImgFormat = validImgFormat.filter(img =>
-      req.files.files.name.endsWith(img)
-    );
-    if (uploadedImgFormat.length <= 0) {
-      errors.image = "Please upload a valid image file";
-      return res.status(400).json({ success: false, errors });
-    }
     const currentUser = await jwt.decode(req.body.user, process.env.JWT_SECRET);
     const getUserDetails = await User.findById(currentUser.id);
     if (!getUserDetails.isAdmin) {
@@ -69,18 +57,13 @@ router.post("/add", async (req, res) => {
       errors.error = "A project of this name already exists";
       return res.status(400).json({ success: false, errors });
     }
-    const image = req.files.files;
-    const imgName = image.name;
-    const imageNameWithDates = "CODECAFEBD-" + Date.now() + "-" + imgName;
-    image.mv(`./client/build/images/projects/${imageNameWithDates}`);
-    image.mv(`./client/public/images/projects/${imageNameWithDates}`);
     const newProject = {
       user: getUserDetails._id,
       name: req.body.name,
       category: req.body.category,
       website: req.body.website,
       github: req.body.github,
-      image: imageNameWithDates
+      image: req.body.image
     };
     const createProject = await Project.create(newProject);
     if (createProject) {
@@ -93,6 +76,7 @@ router.post("/add", async (req, res) => {
       });
     }
   } catch (err) {
+    console.log(err);
     res.status(500).json({
       success: false,
       errors: {
@@ -126,30 +110,15 @@ router.get("/delete/:id", async (req, res) => {
 // Route ==> (POST) ==> /api/projects/update/:id
 router.post("/update/:id", async (req, res) => {
   try {
-    const image = req.files !== null && req.files.files;
-    const imgName = image.name;
-    const imageNameWithDates = "CODECAFEBD-" + Date.now() + "-" + imgName;
     const { isValid, errors } = projectValidator(req.body);
     if (!isValid) return res.status(400).json({ success: false, errors });
     const getExistingProject = await Project.findById(req.params.id);
-    if (req.files !== null) {
-      const validImgFormat = [".png", ".jpeg", ".jpg"];
-      const uploadedImgFormat = validImgFormat.filter(img =>
-        req.files.files.name.endsWith(img)
-      );
-      if (uploadedImgFormat.length <= 0) {
-        errors.image = "Please upload a valid image file";
-        return res.status(400).json({ success: false, errors });
-      }
-      image.mv(`./client/build/images/projects/${imageNameWithDates}`);
-      image.mv(`./client/public/images/projects/${imageNameWithDates}`);
-    }
     const projectUpdate = {
       name: req.body.name,
       category: req.body.category,
       website: req.body.website,
       github: req.body.github,
-      image: req.files !== null ? imageNameWithDates : getExistingProject.image
+      image: req.body.image
     };
     const updatedProject = await Project.findByIdAndUpdate(
       req.params.id,

@@ -6,11 +6,7 @@ import ProjectsCardMenuItem from "./ProjectsCardMenuItem";
 const ProjectsCard = props => {
   return (
     <div className="projects_card">
-      <img
-        src={`/images/projects/${props.image}`}
-        alt={props.title}
-        className="projects_card_img"
-      />
+      <img src={props.image} alt={props.title} className="projects_card_img" />
       <div className="projects_card_info">
         <div className="projects_card_info_content">
           <h4 className="projects_card_info_content_title">{props.title}</h4>

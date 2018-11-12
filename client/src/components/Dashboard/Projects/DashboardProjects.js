@@ -22,9 +22,9 @@ class DashboardProjects extends Component {
       name: "",
       category: "",
       website: "",
-      github: ""
+      github: "",
+      image: ""
     },
-    image: {},
     imagePreview: ""
   };
 
@@ -47,25 +47,23 @@ class DashboardProjects extends Component {
   };
 
   onImagePreviewChangeHandler = e => {
-    if (e.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = data => {
-        this.setState({
-          ...this.state,
-          imagePreview: data.target.result
-        });
-      };
-      reader.readAsDataURL(e.target.files[0]);
-      this.setState({
-        ...this.state,
-        image: e.target.files[0]
-      });
-    }
+    this.setState({
+      ...this.state,
+      formValue: {
+        ...this.state.formValue,
+        image: e.target.value
+      },
+      imagePreview: e.target.value
+    });
   };
 
   onImageCrossClickHandler = e => {
     this.setState({
       ...this.state,
+      formValue: {
+        ...this.state.formValue,
+        image: ""
+      },
       imagePreview: ""
     });
   };
@@ -81,16 +79,13 @@ class DashboardProjects extends Component {
 
   onFormSubmitHandler = async e => {
     e.preventDefault();
-    const data = { ...this.state.formValue };
-    data.user = document.cookie.split("=")[1];
-    data.image = this.state.image;
     const newProject = new FormData();
-    newProject.append("files", this.state.image);
-    newProject.append("user", data.user);
-    newProject.append("name", data.name);
-    newProject.append("category", data.category);
-    newProject.append("website", data.website);
-    newProject.append("github", data.github);
+    newProject.append("user", document.cookie.split("=")[1]);
+    newProject.append("name", this.state.formValue.name);
+    newProject.append("category", this.state.formValue.category);
+    newProject.append("website", this.state.formValue.website);
+    newProject.append("github", this.state.formValue.github);
+    newProject.append("image", this.state.imagePreview);
     const res = await this.props.addProjectAction(newProject);
     if (res) {
       this.setState({
@@ -128,19 +123,13 @@ class DashboardProjects extends Component {
   onProjectUpdateHandler = id => async e => {
     try {
       e.preventDefault();
-      const project = { ...this.state.formValue };
-      project.id = id;
-      project.image = this.state.image;
       const updateProject = new FormData();
-      updateProject.append("files", project.image);
-      updateProject.append("name", project.name);
-      updateProject.append("category", project.category);
-      updateProject.append("website", project.website);
-      updateProject.append("github", project.github);
-      const res = await this.props.updateProjectAction(
-        project.id,
-        updateProject
-      );
+      updateProject.append("image", this.state.imagePreview);
+      updateProject.append("name", this.state.formValue.name);
+      updateProject.append("category", this.state.formValue.category);
+      updateProject.append("website", this.state.formValue.website);
+      updateProject.append("github", this.state.formValue.github);
+      const res = await this.props.updateProjectAction(id, updateProject);
       if (res) {
         this.setState({
           ...this.state,
