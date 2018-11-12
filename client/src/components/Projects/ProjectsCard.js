@@ -11,7 +11,7 @@ const ProjectsCard = props => {
         <div className="projects_card_info_content">
           <h4 className="projects_card_info_content_title">{props.title}</h4>
           <div className="projects_card_info_content_menu">
-            <ProjectsCardMenuItem image="sample.jpg" icon="fas fa-eye" />
+            <ProjectsCardMenuItem image={props.image} icon="fas fa-eye" />
             <ProjectsCardMenuItem href={props.chrome} icon="fab fa-chrome" />
             <ProjectsCardMenuItem href={props.github} icon="fab fa-github" />
           </div>

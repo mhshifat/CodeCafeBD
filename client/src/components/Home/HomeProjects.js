@@ -68,12 +68,7 @@ class HomeProjects extends Component {
   renderProjects = () => {
     if (this.state.currentProjectCategory === "all") {
       return this.state.projects.map(project => (
-        <div
-          key={project._id}
-          className="card wow zoomIn"
-          data-wow-duration="2s"
-          data-wow-delay="0s"
-        >
+        <div key={project._id} className="card">
           <ProjectsCard
             image={project.image}
             title={project.name}
@@ -89,12 +84,7 @@ class HomeProjects extends Component {
             project.category.toLowerCase() === this.state.currentProjectCategory
         )
         .map(pro => (
-          <div
-            key={pro._id}
-            className="card wow zoomIn"
-            data-wow-duration="2s"
-            data-wow-delay="0s"
-          >
+          <div key={pro._id} className="card">
             <ProjectsCard
               image={pro.image}
               title={pro.name}
@@ -125,7 +115,13 @@ class HomeProjects extends Component {
               projectClick={this.onProjectsNavbarItemClickHandler}
               next={this.onNextClickHandler}
             />
-            <div className="row">{this.renderProjects()}</div>
+            <div
+              className="row wow zoomIn"
+              data-wow-duration="2s"
+              data-wow-delay="0s"
+            >
+              {this.renderProjects()}
+            </div>
           </div>
         </div>
       </section>

@@ -19,7 +19,7 @@ const ProjectsNavbar = props => {
     <div className="projects_navbar">
       <span
         className={`projects_navbar_wrapper wow zoomIn ${props.mainState
-          .categories.length < 3 && "plr-2"}`}
+          .categories.length < 4 && "plr-2"}`}
         data-wow-duration="2s"
       >
         <ProjectNavbarCatsPrevious
