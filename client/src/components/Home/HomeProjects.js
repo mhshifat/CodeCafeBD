@@ -66,8 +66,15 @@ class HomeProjects extends Component {
   };
 
   renderProjects = () => {
-    if (this.state.currentProjectCategory === "all") {
-      return this.state.projects.map(project => (
+    if (
+      this.state.currentProjectCategory === "all" &&
+      this.state.projects.length > 0
+    ) {
+      const projects = [];
+      for (let i = 0; i < 6; i++) {
+        projects.push(this.state.projects[i]);
+      }
+      return projects.map(project => (
         <div key={project._id} className="card">
           <ProjectsCard
             image={project.image}
@@ -77,22 +84,30 @@ class HomeProjects extends Component {
           />
         </div>
       ));
-    } else {
-      return this.state.projects
-        .filter(
-          project =>
-            project.category.toLowerCase() === this.state.currentProjectCategory
-        )
-        .map(pro => (
-          <div key={pro._id} className="card">
-            <ProjectsCard
-              image={pro.image}
-              title={pro.name}
-              chrome={pro.website}
-              github={pro.github}
-            />
-          </div>
-        ));
+    } else if (
+      this.state.currentProjectCategory !== "all" &&
+      this.state.projects.length > 0
+    ) {
+      const filteredPro = this.state.projects.filter(
+        pro => pro.category.toLowerCase() === this.state.currentProjectCategory
+      );
+      const projects = [];
+      for (let i = 0; i < 6; i++) {
+        projects.push(filteredPro[i]);
+      }
+      return projects.map(
+        pro =>
+          pro !== undefined && (
+            <div key={pro._id} className="card">
+              <ProjectsCard
+                image={pro.image}
+                title={pro.name}
+                chrome={pro.website}
+                github={pro.github}
+              />
+            </div>
+          )
+      );
     }
   };
 
