@@ -34,7 +34,17 @@ class DashboardProjects extends Component {
 
   onModalBtnClickHandler = () => {
     this.setState({
-      isModalOpen: true
+      ...this.state,
+      isModalOpen: true,
+      formValue: {
+        id: "",
+        name: "",
+        category: "",
+        website: "",
+        github: "",
+        image: ""
+      },
+      imagePreview: ""
     });
   };
 
