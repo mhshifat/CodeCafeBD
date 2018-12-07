@@ -5,7 +5,7 @@ const SideNavbarHeader = () => {
   return (
     <div className="side_navbar_header">
       <Link to="/" className="side_navbar_header_logo">
-        <h4 className="side_navbar_header_logo_brand">CODECAFEBD</h4>
+        <h4 className="side_navbar_header_logo_brand">MHSHIFAT</h4>
       </Link>
     </div>
   );

@@ -24,7 +24,7 @@ const HomeServices = () => {
               <HomeServicesCard
                 icon="fas fa-chess-rook"
                 title="Strategy & Planning"
-                quote="All our projects, large or small, begins here."
+                quote="All my projects, large or small, begins here."
               />
             </div>
 

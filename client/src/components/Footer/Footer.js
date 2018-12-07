@@ -32,8 +32,8 @@ const Footer = () => {
         <h4 className="footer_copy_text wow zoomIn" data-wow-duration="2s">
           <i className="fas fa-heart" /> <i className="fas fa-copyright" /> 2018
           Handmade by{" "}
-          <a target="_black" href="http://www.codecafebd.ga">
-            codecafebd
+          <a target="_black" href="http://www.mhshifat.ga">
+            mhshifat
           </a>{" "}
           with lots of love <i className="fas fa-heart" />
         </h4>
